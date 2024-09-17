@@ -122,3 +122,7 @@ O sistema também fica de olho na quantidade de RAM disponível. Se estiver muit
 
 O sistema possuir um menu aonde o usuário pode conferir o histórico de erros dentro da propria tela para o usuário , aonde pelos botões ele pode interagir com o menu e conferir.
 
+### link da simulação
+```
+https://wokwi.com/projects/408601927738101761
+```
