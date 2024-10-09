@@ -1,0 +1,48 @@
+﻿@model List<EquipamentoViewModel>
+@{
+    ViewData["Title"] = "Equipamentos Cadastrados";
+}
+
+<h1>Equipamentos cadastrados</h1>
+
+<a href="/equipamento/NovoRegistro" class="btn btn-info">Novo registro</a>
+<br />
+
+<table>
+    <tr>
+        <td>Ações</td>
+        <td>Id</td>
+        <td>Nome</td>
+        <td>Status Equipamento</td>
+        <td>Empresa</td>
+        <td>Mac Address</td>
+        <td>Ultima atualização</td>
+    </tr>
+
+    @foreach (var eq in Model)
+    {
+        <tr>
+            <td>
+                <a href="/equipamento/editar?id=@eq.Id">Editar</a>
+                &nbsp;
+                <a href="javascript:apaga(@eq.Id)">Apagar</a>
+                &nbsp;
+                <a href="/equipamento/exibir?id=@eq.Id">Exibir</a>
+            </td>
+            <td>@eq.Id</td>
+            <td>@eq.Nome</td>
+            <td>@eq.StatusEquipamento</td>
+            <td>@eq.Empresa</td>
+            <td>@eq.MacAddress </td>
+            <td>@eq.LastUpdate</td>
+        </tr>
+    }
+</table>
+
+<script>
+    function apaga(id) {
+        if (confirm('Apaga mesmo?'))
+            location.href = "/equipamento/Delete?id=" + id;
+    }
+</script>
+

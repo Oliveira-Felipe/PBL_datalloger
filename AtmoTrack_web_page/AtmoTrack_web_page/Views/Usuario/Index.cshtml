@@ -1,0 +1,45 @@
+﻿@model List<UsuarioViewModel>
+@{
+    ViewData["Title"] = "Usuários Cadastrados";
+}
+
+    <h1>usuários Cadastrados</h1>
+
+<a href="/usuario/NovoRegistro" class="btn btn-info">Novo registro</a>
+<br />
+
+<table>
+    <tr>
+        <td>Ações</td>
+        <td>Id</td>
+        <td>Nome</td>
+        <td>Email</td>
+        <td>Empresa</td>
+        <td>Cargo</td>
+    </tr>
+
+    @foreach (var us in Model)
+    {
+        <tr>
+            <td>
+                <a href="/usuario/editar?id=@us.Id">Editar</a>
+                &nbsp;
+                <a href="javascript:apaga(@us.Id)">Apagar</a>
+                &nbsp;
+                <a href="/usuario/exibir?id=@us.Id">Exibir</a>
+            </td>
+            <td>@us.Id</td>
+            <td>@us.Nome</td>
+            <td>@us.Email</td>
+            <td>@us.Empresa</td>
+            <td>@us.Cargo</td>
+        </tr>
+    }
+</table>
+
+<script>
+    function apaga(id) {
+        if (confirm('Apaga mesmo?'))
+            location.href = "/usuario/Delete?id=" + id;
+    }
+</script>
