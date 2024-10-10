@@ -1,0 +1,151 @@
+﻿@model UsuarioViewModel
+
+@{
+    ViewData["Title"] = "Cadastro de Usuário";
+}
+
+<h2 class="text-center mb-4">Cadastro de Usuário</h2>
+
+<form asp-action="Salvar">
+    <input type="hidden" value="@ViewBag.cadastroUsuario" name="cadastroUsuario" />
+    <div class="container">
+        <div class="row">
+            <!-- Id e Nome na mesma linha -->
+            <div class="col-md-3">
+                <label class="col-form-label">Id</label>
+                @if (ViewBag.cadastroUsuario == "I")
+                {
+                    <input type="text" name="id" value="@Model.Id" class="form-control" />
+                }
+                else
+                {
+                    <input type="text" name="id" value="@Model.Id" class="form-control" readonly />
+                }
+            </div>
+            <div class="col-md-9">
+                <label class="col-form-label">Nome</label>
+                <input type="text" name="nome" value="@Model.Nome" class="form-control" />
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <!-- Email sozinho em uma linha -->
+            <div class="col-md-12">
+                <label class="col-form-label">Email</label>
+                <input type="email" name="email" value="@Model.Email" class="form-control" />
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <!-- Senha e Confirmação de Senha na mesma linha -->
+            <div class="col-md-6">
+                <label class="col-form-label">Senha</label>
+                <input type="password" name="senha" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label class="col-form-label">Confirmação de senha</label>
+                <input type="password" name="confirmacaoSenha" class="form-control" />
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <!-- Endereço sozinho em uma linha -->
+            <div class="col-md-12">
+                <label class="col-form-label">Endereço</label>
+                <input type="text" name="endereco" value="@Model.Endereco" class="form-control" />
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <!-- Estado e CEP na mesma linha -->
+            <div class="col-md-4">
+                <label for="EstadoId">Estado</label>
+                <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.Estados">
+                    <option value="">Selecione um estado</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="CidadeId">Cidade</label>
+                <select id="CidadeId" name="CidadeId" class="form-control">
+                    <option value="">Selecione uma cidade</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="Cep">CEP</label>
+                <input type="text" name="cep" value="@Model.Cep" class="form-control" />
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <!-- Telefone e Telefone Comercial na mesma linha -->
+            <div class="col-md-6">
+                <label for="Telefone">Telefone</label>
+                <input type="text" name="telefone" value="@Model.Telefone" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label for="TelefoneComercial">Telefone Comercial</label>
+                <input type="text" name="telefoneComercial" value="@Model.TelefoneComercial" class="form-control" />
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <!-- Empresa e Cargo na mesma linha -->
+            <div class="col-md-6">
+                <label for="Empresa">Empresa</label>
+                <input type="text" name="empresa" value="@Model.Empresa" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label for="Cargo">Cargo</label>
+                <input type="text" name="cargo" value="@Model.Cargo" class="form-control" />
+            </div>
+        </div>
+        <br />
+
+        @if (ViewBag.cadastroUsuario != "I")
+        {
+            <div class="row">
+                <!-- Data de Registro -->
+                <div class="col-md-12">
+                    <label for="DataRegistro">Data de Registro</label>
+                    <input type="date" name="dataRegistro" value="@Model.DataRegistro.ToString("yyyy-MM-dd")" class="form-control" />
+                </div>
+            </div>
+            <br />
+        }
+
+        <!-- Botão de Submit -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <input type="submit" class="btn btn-success" value="Salvar" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.getElementById('EstadoId').addEventListener('change', function () {
+        var estadoId = this.value;
+        var cidadeSelect = document.getElementById('CidadeId');
+        cidadeSelect.innerHTML = '<option value="">Selecione uma cidade</option>'; // Reset
+
+        if (estadoId) {
+            fetch('/Usuario/GetCidades?estadoId=' + estadoId)
+                .then(response => response.json())
+                .then(cidades => {
+                    cidades.forEach(cidade => {
+                        var option = document.createElement('option');
+                        option.value = cidade.id;
+                        option.textContent = cidade.nome;
+                        cidadeSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Erro ao buscar cidades:', error));
+        }
+    });
+</script>

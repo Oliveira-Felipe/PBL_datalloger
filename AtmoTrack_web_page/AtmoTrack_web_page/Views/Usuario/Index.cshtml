@@ -1,0 +1,82 @@
+﻿@model List<UsuarioViewModel>
+@{
+    ViewData["Title"] = "Usuários Cadastrados";
+}
+
+    <h1>usuários Cadastrados</h1>
+
+<a href="/usuario/NovoRegistro" class="btn btn-info">Novo registro</a>
+<br />
+
+<table class="table">
+    <tr>
+        <th>Ações</th>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Empresa</th>
+        <th>Cargo</th>
+    </tr>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var us = Model[i];
+        var rowClass = i % 2 == 0 ? "linha-verde" : "linha-azulescuro";
+
+        <tr class="@rowClass">
+            <td>
+                
+                <a href="/usuario/editar?id=@us.Id">
+                    <img src="/imges/edit.png"/>
+                </a>
+                &nbsp;
+                <a href="javascript:apaga(@us.Id)">
+                    <img src="/img/del.png" />
+                </a>
+                &nbsp;
+                <a href="/usuario/exibir?id=@us.Id">
+                    <img src="/img/view.png" />
+                </a>
+            </td>
+            <td>@us.Id</td>
+            <td>@us.Nome</td>
+            <td>@us.Email</td>
+            <td>@us.Empresa</td>
+            <td>@us.Cargo</td>
+        </tr>
+    }
+</table>
+
+<script>
+    function apaga(id) {
+        if (confirm('Apaga mesmo?'))
+            location.href = "/usuario/Delete?id=" + id;
+    }
+</script>
+
+<style>
+    th {
+        color: #0DCAF0;
+    }
+
+    .linha-verde {
+        background-color: #0DCAF0;
+        color: black;
+    }
+
+    .linha-azulescuro {
+        background-color: #112E3C;
+        color: #0DCAF0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+</style>

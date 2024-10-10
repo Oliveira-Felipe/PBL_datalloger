@@ -1,0 +1,34 @@
+﻿@model UsuarioViewModel
+
+@{
+    ViewData["Title"] = "Usuário";
+}
+
+<h1>Visualização de Usuário</h1>
+<span class="TituloSublinhado">
+    @Model.Nome
+</span>
+<hr />
+
+&nbsp;&nbsp; Email: @Model.Email
+<br />
+&nbsp;&nbsp; Endereço: @Model.Endereco
+<br />
+&nbsp;&nbsp; CEP: @Model.Cep
+<br />
+&nbsp;&nbsp; Telefone: @Model.Telefone
+<br />
+&nbsp;&nbsp; Telefone Comercial: @Model.TelefoneComercial
+<br />
+&nbsp;&nbsp; Empresa: @Model.Empresa
+<br />
+&nbsp;&nbsp; Cargo: @Model.Cargo
+<br />
+&nbsp;&nbsp; Estado: @ViewBag.EstadoNome
+<br />
+&nbsp;&nbsp; Cidade: @ViewBag.CidadeNome
+<br />
+&nbsp;&nbsp; Data de Registro: @Model.DataRegistro.ToString("dd/MM/yyyy")
+<br />
+&nbsp;&nbsp; Data de Alteração: @(Model.DataAlteracao?.ToString("dd/MM/yyyy") ?? "Não alterado")
+<br />

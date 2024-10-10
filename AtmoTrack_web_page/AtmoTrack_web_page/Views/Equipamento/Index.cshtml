@@ -1,0 +1,74 @@
+﻿@model List<EquipamentoViewModel>
+@{
+    ViewData["Title"] = "Equipamentos Cadastrados";
+}
+
+<h1>Equipamentos cadastrados</h1>
+
+<a href="/equipamento/NovoRegistro" class="btn btn-info">Novo registro</a>
+<br />
+
+<table class="table">
+    <tr>
+        <th>Ações</th>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Status Equipamento</th>
+        <th>Mac Address</th>
+        <th>Última atualização</th>
+    </tr>
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var eq = Model[i];
+        var rowClass = i % 2 == 0 ? "linha-verde" : "linha-azulescuro";
+
+        <tr class="@rowClass">
+            <td>
+                <a href="/equipamento/editar?id=@eq.Id">Editar</a>
+                &nbsp;
+                <a href="javascript:apaga(@eq.Id)">Apagar</a>
+                &nbsp;
+                <a href="/equipamento/exibir?id=@eq.Id">Exibir</a>
+            </td>
+            <td>@eq.Id</td>
+            <td>@eq.Nome</td>
+            <td>@eq.StatusEquipamento</td>
+            <td>@eq.MacAddress </td>
+            <td>@eq.LastUpdate</td>
+        </tr>
+    }
+</table>
+
+<script>
+    function apaga(id) {
+        if (confirm('Apaga mesmo?'))
+            location.href = "/equipamento/Delete?id=" + id;
+    }
+</script>
+
+<style>
+    th{
+        color: #0DCAF0;
+    }
+    .linha-verde {
+        background-color: #0DCAF0;
+        color: black; 
+    }
+
+    .linha-azulescuro {
+        background-color: #112E3C;
+        color: #0DCAF0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+</style>
