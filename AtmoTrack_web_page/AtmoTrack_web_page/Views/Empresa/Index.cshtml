@@ -8,18 +8,21 @@
 <a href="/empresa/NovoRegistro" class="btn btn-info">Novo registro</a>
 <br />
 
-<table>
+<table class="table">
     <tr>
-        <td>Ações</td>
-        <td>Id</td>
-        <td>Nome Fanfasia</td>
-        <td>Web Site</td>
-        <td>Tipo</td>
+        <th>Ações</th>
+        <th>Id</th>
+        <th>Nome Fanfasia</th>
+        <th>Web Site</th>
+        <th>Tipo</th>
     </tr>
 
-    @foreach (var em in Model)
+    @for (int i = 0; i < Model.Count; i++)
     {
-        <tr>
+        var em = Model[i];
+        var rowClass = i % 2 == 0 ? "linha-verde" : "linha-azulescuro"; // Alterna entre verde e azul escuro
+
+        <tr class="@rowClass">
             <td>
                 <a href="/empresa/editar?id=@em.Id">Editar</a>
                 &nbsp;
@@ -41,3 +44,29 @@
             location.href = "/empresa/Delete?id=" + id;
     }
 </script>
+
+<style>
+    th{
+        color: #0DCAF0;
+    }
+    .linha-verde {
+        background-color: #0DCAF0;
+        color: black; 
+    }
+
+    .linha-azulescuro {
+        background-color: #112E3C;
+        color: #0DCAF0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+</style>

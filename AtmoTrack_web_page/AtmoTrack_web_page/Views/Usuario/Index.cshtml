@@ -8,19 +8,22 @@
 <a href="/usuario/NovoRegistro" class="btn btn-info">Novo registro</a>
 <br />
 
-<table>
+<table class="table">
     <tr>
-        <td>Ações</td>
-        <td>Id</td>
-        <td>Nome</td>
-        <td>Email</td>
-        <td>Empresa</td>
-        <td>Cargo</td>
+        <th>Ações</th>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Empresa</th>
+        <th>Cargo</th>
     </tr>
 
-    @foreach (var us in Model)
+    @for (int i = 0; i < Model.Count; i++)
     {
-        <tr>
+        var us = Model[i];
+        var rowClass = i % 2 == 0 ? "linha-verde" : "linha-azulescuro";
+
+        <tr class="@rowClass">
             <td>
                 <a href="/usuario/editar?id=@us.Id">Editar</a>
                 &nbsp;
@@ -43,3 +46,30 @@
             location.href = "/usuario/Delete?id=" + id;
     }
 </script>
+
+<style>
+    th {
+        color: #0DCAF0;
+    }
+
+    .linha-verde {
+        background-color: #0DCAF0;
+        color: black;
+    }
+
+    .linha-azulescuro {
+        background-color: #112E3C;
+        color: #0DCAF0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+</style>

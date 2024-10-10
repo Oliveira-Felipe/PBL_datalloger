@@ -124,8 +124,6 @@ namespace AtmoTrack_web_page.DAO
             return us;
         }
 
-
-
         private EstadoViewModel MontaViewModelEstado(DataRow registro)
         {
             var estado = new EstadoViewModel()
@@ -191,6 +189,28 @@ namespace AtmoTrack_web_page.DAO
             }
 
             return ListaEstados;
+        }
+
+        public List<CidadeViewModel> GetAllCitiesEstadoId(int id)
+        {
+            var ListaCidades = new List<CidadeViewModel>();
+            string sql = "Select * from [dbo].[tbCidade] where estadoId = " + id + "order by Cidade";
+            try
+            {
+                DataTable tabela = HelperDAO.ExecutaSelect(sql, null);
+                foreach (DataRow row in tabela.Rows)
+                {
+                    ListaCidades.Add(MontaViewModelCidade(row));
+                }
+                return ListaCidades;
+            }
+            catch (Exception ex)
+            {
+                // Registrar o erro ou exibir em uma view apropriada
+                Console.WriteLine("Erro: " + ex.Message);
+                throw;
+            }
+
         }
 
         public UsuarioViewModel Consulta(int id)

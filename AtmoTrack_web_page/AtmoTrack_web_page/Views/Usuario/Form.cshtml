@@ -62,13 +62,19 @@
 
         <div class="row">
             <!-- Estado e CEP na mesma linha -->
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <label for="EstadoId">Estado</label>
                 <select asp-for="EstadoId" class="form-control" asp-items="ViewBag.Estados">
                     <option value="">Selecione um estado</option>
                 </select>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <label for="CidadeId">Cidade</label>
+                <select id="CidadeId" name="CidadeId" class="form-control">
+                    <option value="">Selecione uma cidade</option>
+                </select>
+            </div>
+            <div class="col-md-4">
                 <label for="Cep">CEP</label>
                 <input type="text" name="cep" value="@Model.Cep" class="form-control" />
             </div>
@@ -121,3 +127,25 @@
         </div>
     </div>
 </form>
+
+<script>
+    document.getElementById('EstadoId').addEventListener('change', function () {
+        var estadoId = this.value;
+        var cidadeSelect = document.getElementById('CidadeId');
+        cidadeSelect.innerHTML = '<option value="">Selecione uma cidade</option>'; // Reset
+
+        if (estadoId) {
+            fetch('/Usuario/GetCidades?estadoId=' + estadoId)
+                .then(response => response.json())
+                .then(cidades => {
+                    cidades.forEach(cidade => {
+                        var option = document.createElement('option');
+                        option.value = cidade.id;
+                        option.textContent = cidade.nome;
+                        cidadeSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Erro ao buscar cidades:', error));
+        }
+    });
+</script>

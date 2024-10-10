@@ -9,6 +9,7 @@ namespace AtmoTrack_web_page.DAO
         public void Inserir(EquipamentoViewModel equipamento)
         {
             equipamento.DataRegistro = DateTime.Now;
+            equipamento.DataAlteracao = DateTime.Now;
 
             string sql = @"INSERT INTO [dbo].[tbEquipamento](
                             [Id],

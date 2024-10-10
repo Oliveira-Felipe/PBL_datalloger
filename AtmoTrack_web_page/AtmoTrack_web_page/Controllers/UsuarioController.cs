@@ -56,6 +56,20 @@ namespace AtmoTrack_web_page.Controllers
             }
         }
 
+        public IActionResult GetCidades(int estadoId)
+        {
+            try
+            {
+                UsuarioDAO dao = new UsuarioDAO();
+                var cidades = dao.GetAllCitiesEstadoId(estadoId);
+                return Json(cidades);
+            }
+            catch (Exception erro)
+            {
+                return Json(new { error = erro.Message });
+            }
+        }
+
         public IActionResult Salvar(UsuarioViewModel us, string cadastroUsuario)
         {
             try
