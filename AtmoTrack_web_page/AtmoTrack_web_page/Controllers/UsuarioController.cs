@@ -129,7 +129,7 @@ namespace AtmoTrack_web_page.Controllers
             }
             catch(Exception erro)
             {
-                return View("Erro", erro.ToString());
+                return View("Error", erro.ToString());
             }
         }
 
@@ -142,7 +142,7 @@ namespace AtmoTrack_web_page.Controllers
                 return RedirectToAction("Index");
             }catch (Exception erro)
             {
-                return View("Erro", erro.ToString());
+                return View("Error", erro.ToString());
             }
         }
 
@@ -172,7 +172,7 @@ namespace AtmoTrack_web_page.Controllers
                 return View("VisualizarUsuario", us);
             }catch(Exception erro)
             {
-                return View("Erro", erro.ToString());
+                return View("Error", erro.ToString());
             }
         }
     }

@@ -25,17 +25,11 @@
 
         <tr class="@rowClass">
             <td>
-                
-                <a href="/usuario/editar?id=@us.Id">
-                    <img src="/imges/edit.png"/>
+                <a href="/usuario/editar?id=@us.Id"><img src="/images/edit.png" class="image"/>
                 </a>
-                &nbsp;
-                <a href="javascript:apaga(@us.Id)">
-                    <img src="/img/del.png" />
+                <a href="javascript:apaga(@us.Id)"><img src="/images/del.png" class="image"/>
                 </a>
-                &nbsp;
-                <a href="/usuario/exibir?id=@us.Id">
-                    <img src="/img/view.png" />
+                <a href="/usuario/exibir?id=@us.Id"><img src="/images/view.png" class="image"/>
                 </a>
             </td>
             <td>@us.Id</td>
@@ -55,6 +49,10 @@
 </script>
 
 <style>
+    .image {
+        width: 25px;
+    }
+
     th {
         color: #0DCAF0;
     }
@@ -72,6 +70,7 @@
     table {
         width: 100%;
         border-collapse: collapse;
+        align-content: center;
     }
 
     th, td {
