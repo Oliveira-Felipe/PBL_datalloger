@@ -140,7 +140,7 @@ namespace AtmoTrack_web_page.DAO
             var cidade = new CidadeViewModel()
             {
                 Id = Convert.ToInt32(registro["Id"]),
-                Cidade = registro["Cidaded"].ToString(),
+                Cidade = registro["Cidade"].ToString(),
             };
 
             return cidade;

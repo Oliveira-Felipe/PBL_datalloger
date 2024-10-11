@@ -70,7 +70,8 @@
             </div>
             <div class="col-md-4">
                 <label for="CidadeId">Cidade</label>
-                <select id="CidadeId" name="CidadeId" class="form-control">
+                @*<input type="text" name="CidadeId" value="@Model.CidadeId" class="form-control" />*@
+                <select id="CidadeId" name="CidadeId" class="form-control" asp-for="CidadeId">
                     <option value="">Selecione uma cidade</option>
                 </select>
             </div>
@@ -138,10 +139,12 @@
             fetch('/Usuario/GetCidades?estadoId=' + estadoId)
                 .then(response => response.json())
                 .then(cidades => {
+                    console.log(cidades); // Verifique a estrutura do objeto retornado
                     cidades.forEach(cidade => {
+                        console.log(cidade); // Verifique a estrutura de cada cidade
                         var option = document.createElement('option');
-                        option.value = cidade.id;
-                        option.textContent = cidade.nome;
+                        option.value = cidade.cidade;
+                        option.textContent = cidade.cidade;
                         cidadeSelect.appendChild(option);
                     });
                 })
