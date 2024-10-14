@@ -141,8 +141,8 @@
                 .then(cidades => {
                     cidades.forEach(cidade => {
                         var option = document.createElement('option');
-                        option.value = cidade.id; // Defina o valor como o ID da cidade
-                        option.textContent = cidade.cidade; // Exiba o nome da cidade
+                        option.value = cidade.id;
+                        option.textContent = cidade.cidade;
                         cidadeSelect.appendChild(option);
                     });
                 })
